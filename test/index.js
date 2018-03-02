@@ -4,7 +4,7 @@ var chai = require('chai');
 var sinon = require('sinon');
 var should = chai.should();
 var expect = chai.expect;
-var bitcore = require('bitcore-lib');
+var bitcore = require('bitcore-lib-crown');
 var PrivateKey = bitcore.PrivateKey;
 var PublicKey = bitcore.PublicKey;
 var KJUR = require('jsrsasign');
@@ -874,7 +874,7 @@ describe('PaymentProtocol', function() {
         verifier.update(buf);
 
         var verified = verifier.verify(pem, sig);
-          
+
         verified.should.equal(true);
       }
 
