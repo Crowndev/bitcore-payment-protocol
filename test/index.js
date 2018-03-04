@@ -242,16 +242,16 @@ describe('PaymentProtocol', function() {
       serialized.should.deep.equal(serialized2);
     });
 
-    it('makePaymentACK BCH', function () {
+    it('makePaymentACK CRW', function () {
       var payment = new PaymentProtocol.Payment();
-      var ack = new PaymentProtocol().makePaymentACK(null, 'BCH');
+      var ack = new PaymentProtocol().makePaymentACK(null, 'CRW');
       ack.set('payment', payment);
       ack.set('memo', 'this is a memo');
       ack.get('memo').should.equal('this is a memo');
       var valid = ack.isValidSize();
       valid.should.equal(true);
       var contentType = ack.getContentType();
-      contentType.should.equal(PaymentProtocol.LEGACY_PAYMENT['BCH'].ACK_CONTENT_TYPE);
+      contentType.should.equal(PaymentProtocol.LEGACY_PAYMENT['CRW'].ACK_CONTENT_TYPE);
     });
 
   });
@@ -369,18 +369,18 @@ describe('PaymentProtocol', function() {
       buf.length.should.be.greaterThan(0);
     });
 
-    it('should serialize a BCH PaymentRequest and not fail', function() {
+    it('should serialize a CRW PaymentRequest and not fail', function() {
       var pd = new PaymentProtocol.PaymentDetails();
       pd.set('time', 0);
       var pdbuf = pd.toBuffer();
 
-      var paypro = new PaymentProtocol('BCH');
+      var paypro = new PaymentProtocol('CRW');
       paypro.makePaymentRequest();
       paypro.set('serialized_payment_details', pdbuf);
       var buf = paypro.serializeForSig();
       var valid = paypro.isValidSize();
       var contentType = paypro.getContentType();
-      contentType.should.equal(PaymentProtocol.LEGACY_PAYMENT['BCH'].REQUEST_CONTENT_TYPE);
+      contentType.should.equal(PaymentProtocol.LEGACY_PAYMENT['CRW'].REQUEST_CONTENT_TYPE);
       valid.should.equal(true);
       buf.length.should.be.greaterThan(0);
     });
